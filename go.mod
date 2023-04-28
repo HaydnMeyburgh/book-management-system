@@ -1,3 +1,10 @@
-module book-managment-system
+module github.com/HaydnMeyburgh/booking-management-system
 
-go 1.23
+go 1.20
+
+require (
+	github.com/gorilla/mux v1.8.0 // indirect
+	github.com/jinzhu/gorm v1.9.16 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/lib/pq v1.1.1 // indirect
+)
