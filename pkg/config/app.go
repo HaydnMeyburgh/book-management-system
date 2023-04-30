@@ -1,19 +1,26 @@
 package config
 
 import (
-	"database/sql"
+	"fmt"
+	"log"
+
+	"github.com/HaydnMeyburgh/booking-management-system/pkg/models"
+
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
+var DB *gorm.DB
 
-func Connect() {
-	myDB_dsn := "host=localhost user=haydn password=tryguess dbname=bookstore port=5432 sslmode=disable TimeZone=Asia/Shanghai"
-	sqlDB, err := sql.Open("pgx", myDB_dsn)
-	gormDB, err := gorm.Open(postgres.New(postgres.Config{
-		Conn: sqlDB,
-	}), &gorm.Config{})
+func DBConnection() {
+	myDB_dsn := "host=localhost user=haydn password=tryguess dbname=bookstore port=5432 sslmode=disable"
+	db, err := gorm.Open(postgres.Open(myDB_dsn), &gorm.Config{})
+
 	if err != nil {
-		panic("Failed to connect to database")
+		log.Fatal("failed to connect to database...", err)
 	}
+
+	fmt.Println("Database Connection successful!")
+	DB = db
+	DB.AutoMigrate(&models.Book{})
 }
