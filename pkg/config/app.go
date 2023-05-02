@@ -1,10 +1,7 @@
 package config
 
 import (
-	"fmt"
 	"log"
-
-	"github.com/HaydnMeyburgh/booking-management-system/pkg/models"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -20,7 +17,9 @@ func DBConnection() {
 		log.Fatal("failed to connect to database...", err)
 	}
 
-	fmt.Println("Database Connection successful!")
 	DB = db
-	DB.AutoMigrate(&models.Book{})
+}
+
+func GetDB() *gorm.DB {
+	return DB
 }
